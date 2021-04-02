@@ -1,4 +1,5 @@
-# crypto-alerts project
+# CrypstoStocks WS
+crypto-alerts Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
