@@ -1,8 +1,24 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BlockchainAlert{
+
+	@JsonCreator
+	public BlockchainAlert(@JsonProperty("blockchain") String blockchain,
+						   @JsonProperty("metric") String metric,
+						   @JsonProperty("threshold") String threshold,
+						   @JsonProperty("type") String type,
+						   @JsonProperty("message") String message,
+						   @JsonProperty("direction") String direction) {
+		this.blockchain = blockchain;
+		this.metric = metric;
+		this.threshold = threshold;
+		this.type = type;
+		this.message = message;
+		this.direction = direction;
+	}
 
 	@JsonProperty("blockchain")
 	private String blockchain;

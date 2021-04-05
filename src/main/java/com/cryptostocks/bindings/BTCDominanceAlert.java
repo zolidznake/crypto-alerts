@@ -1,8 +1,22 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BTCDominanceAlert{
+
+	@JsonCreator
+	public BTCDominanceAlert(@JsonProperty("currency") String currency,
+							 @JsonProperty("threshold") String threshold,
+							 @JsonProperty("type") String type,
+							 @JsonProperty("message") String message,
+							 @JsonProperty("direction") String direction) {
+		this.currency = currency;
+		this.threshold = threshold;
+		this.type = type;
+		this.message = message;
+		this.direction = direction;
+	}
 
 	@JsonProperty("currency")
 	private String currency;

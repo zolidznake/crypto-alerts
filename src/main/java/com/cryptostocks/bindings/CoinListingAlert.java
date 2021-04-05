@@ -1,8 +1,21 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CoinListingAlert{
+
+
+	@JsonCreator
+	public CoinListingAlert(@JsonProperty("currency") String currency,
+							@JsonProperty("exchange") String exchange,
+							@JsonProperty("type") String type,
+							@JsonProperty("message") String message) {
+		this.currency = currency;
+		this.exchange = exchange;
+		this.type = type;
+		this.message = message;
+	}
 
 	@JsonProperty("currency")
 	private String currency;

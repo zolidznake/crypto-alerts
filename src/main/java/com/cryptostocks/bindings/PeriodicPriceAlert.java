@@ -1,8 +1,24 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PeriodicPriceAlert{
+
+	@JsonCreator
+	public PeriodicPriceAlert(@JsonProperty("target_currency") String targetCurrency,
+							  @JsonProperty("price") String price,
+							  @JsonProperty("currency") String currency,
+							  @JsonProperty("exchange") String exchange,
+							  @JsonProperty("type") String type,
+							  @JsonProperty("message") String message) {
+		this.targetCurrency = targetCurrency;
+		this.price = price;
+		this.currency = currency;
+		this.exchange = exchange;
+		this.type = type;
+		this.message = message;
+	}
 
 	@JsonProperty("target_currency")
 	private String targetCurrency;

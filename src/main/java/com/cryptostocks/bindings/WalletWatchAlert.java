@@ -1,8 +1,24 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WalletWatchAlert{
+
+	@JsonCreator
+	public WalletWatchAlert(@JsonProperty("address") String address,
+							@JsonProperty("blockchain") String blockchain,
+							@JsonProperty("currency") String currency,
+							@JsonProperty("type") String type,
+							@JsonProperty("message") String message,
+							@JsonProperty("value")String value) {
+		this.address = address;
+		this.blockchain = blockchain;
+		this.currency = currency;
+		this.type = type;
+		this.message = message;
+		this.value = value;
+	}
 
 	@JsonProperty("address")
 	private String address;

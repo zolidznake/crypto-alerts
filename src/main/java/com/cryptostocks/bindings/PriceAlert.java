@@ -1,69 +1,167 @@
 package com.cryptostocks.bindings;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
-public class PriceAlert{
+import javax.annotation.Generated;
+import java.util.HashMap;
+import java.util.Map;
 
-	@JsonProperty("target_currency")
-	private String targetCurrency;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "type",
+        "message",
+        "currency",
+        "direction",
+        "price",
+        "target_currency",
+        "exchange"
+})
+@Generated("jsonschema2pojo")
+public class PriceAlert {
 
-	@JsonProperty("price")
-	private String price;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("message")
+    private String message;
+    @JsonProperty("currency")
+    private String currency;
+    @JsonProperty("direction")
+    private String direction;
+    @JsonProperty("price")
+    private String price;
+    @JsonProperty("target_currency")
+    private String targetCurrency;
+    @JsonProperty("exchange")
+    private String exchange;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	@JsonProperty("currency")
-	private String currency;
+    /**
+     * No args constructor for use in serialization
+     */
+    public PriceAlert() {
+    }
 
-	@JsonProperty("exchange")
-	private String exchange;
+    /**
+     * @param targetCurrency
+     * @param price
+     * @param currency
+     * @param exchange
+     * @param type
+     * @param message
+     * @param direction
+     */
 
-	@JsonProperty("type")
-	private String type;
+    @JsonCreator
+    public PriceAlert( @JsonProperty("type") String type,
+                       @JsonProperty("message") String message,
+                       @JsonProperty("currency") String currency,
+                       @JsonProperty("direction") String direction,
+                       @JsonProperty("price") String price,
+                       @JsonProperty("target_currency") String targetCurrency,
+                       @JsonProperty("exchange") String exchange) {
+        super();
+        this.type = type;
+        this.message = message;
+        this.currency = currency;
+        this.direction = direction;
+        this.price = price;
+        this.targetCurrency = targetCurrency;
+        this.exchange = exchange;
+    }
 
-	@JsonProperty("message")
-	private String message;
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
 
-	@JsonProperty("direction")
-	private String direction;
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getTargetCurrency(){
-		return targetCurrency;
-	}
+    @JsonProperty("message")
+    public String getMessage() {
+        return message;
+    }
 
-	public String getPrice(){
-		return price;
-	}
+    @JsonProperty("message")
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public String getCurrency(){
-		return currency;
-	}
+    @JsonProperty("currency")
+    public String getCurrency() {
+        return currency;
+    }
 
-	public String getExchange(){
-		return exchange;
-	}
+    @JsonProperty("currency")
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-	public String getType(){
-		return type;
-	}
+    @JsonProperty("direction")
+    public String getDirection() {
+        return direction;
+    }
 
-	public String getMessage(){
-		return message;
-	}
+    @JsonProperty("direction")
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 
-	public String getDirection(){
-		return direction;
-	}
+    @JsonProperty("price")
+    public String getPrice() {
+        return price;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"PriceAlert{" + 
-			"target_currency = '" + targetCurrency + '\'' + 
-			",price = '" + price + '\'' + 
-			",currency = '" + currency + '\'' + 
-			",exchange = '" + exchange + '\'' + 
-			",type = '" + type + '\'' + 
-			",message = '" + message + '\'' + 
-			",direction = '" + direction + '\'' + 
-			"}";
-		}
+    @JsonProperty("price")
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    @JsonProperty("target_currency")
+    public String getTargetCurrency() {
+        return targetCurrency;
+    }
+
+    @JsonProperty("target_currency")
+    public void setTargetCurrency(String targetCurrency) {
+        this.targetCurrency = targetCurrency;
+    }
+
+    @JsonProperty("exchange")
+    public String getExchange() {
+        return exchange;
+    }
+
+    @JsonProperty("exchange")
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+
+    @Override
+    public String toString() {
+        return "PriceAlert{" +
+                "type='" + type + '\'' +
+                ", message='" + message + '\'' +
+                ", currency='" + currency + '\'' +
+                ", direction='" + direction + '\'' +
+                ", price='" + price + '\'' +
+                ", targetCurrency='" + targetCurrency + '\'' +
+                ", exchange='" + exchange + '\'' +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

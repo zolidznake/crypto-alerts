@@ -1,53 +1,67 @@
 package com.cryptostocks.bindings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BitcoinMempoolAlert{
+public class BitcoinMempoolAlert {
 
-	@JsonProperty("metric")
-	private String metric;
+    @JsonCreator
+    public BitcoinMempoolAlert(@JsonProperty("metric") String metric,
+                               @JsonProperty("threshold") String threshold,
+                               @JsonProperty("type") String type,
+                               @JsonProperty("message") String message,
+                               @JsonProperty("direction") String direction) {
+        this.metric = metric;
+        this.threshold = threshold;
+        this.type = type;
+        this.message = message;
+        this.direction = direction;
+    }
 
-	@JsonProperty("threshold")
-	private String threshold;
+    @JsonProperty("metric")
+    private String metric;
 
-	@JsonProperty("type")
-	private String type;
+    @JsonProperty("threshold")
+    private String threshold;
 
-	@JsonProperty("message")
-	private String message;
+    @JsonProperty("type")
+    private String type;
 
-	@JsonProperty("direction")
-	private String direction;
+    @JsonProperty("message")
+    private String message;
 
-	public String getMetric(){
-		return metric;
-	}
+    @JsonProperty("direction")
+    private String direction;
 
-	public String getThreshold(){
-		return threshold;
-	}
+    public String getMetric() {
+        return metric;
+    }
 
-	public String getType(){
-		return type;
-	}
+    public String getThreshold() {
+        return threshold;
+    }
 
-	public String getMessage(){
-		return message;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getDirection(){
-		return direction;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"BitcoinMempoolAlert{" + 
-			"metric = '" + metric + '\'' + 
-			",threshold = '" + threshold + '\'' + 
-			",type = '" + type + '\'' + 
-			",message = '" + message + '\'' + 
-			",direction = '" + direction + '\'' + 
-			"}";
-		}
+    public String getDirection() {
+        return direction;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "BitcoinMempoolAlert{" +
+                        "metric = '" + metric + '\'' +
+                        ",threshold = '" + threshold + '\'' +
+                        ",type = '" + type + '\'' +
+                        ",message = '" + message + '\'' +
+                        ",direction = '" + direction + '\'' +
+                        "}";
+    }
 }
