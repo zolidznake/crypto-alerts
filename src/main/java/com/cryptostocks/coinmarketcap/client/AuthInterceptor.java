@@ -3,7 +3,6 @@ package com.cryptostocks.coinmarketcap.client;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Singleton;
 import java.io.IOException;
