@@ -62,6 +62,7 @@ Check CoinMarketCap API Documentation
 ##Have some fun while developing ;)
 
 >Youtube: https://www.youtube.com/watch?v=ySLc8gZ3oEc
+>        https://www.youtube.com/watch?v=55Mvx6NWAu0
 
 ![Image of Yaktocat](https://octodex.github.com/images/daftpunktocat-thomas.gif)
 
