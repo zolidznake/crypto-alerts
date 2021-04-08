@@ -44,22 +44,18 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 
 You can then execute your native executable with: `./target/crypto-alerts-1.0.0-SNAPSHOT-runner`
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
+>Youtube: https://www.youtube.com/watch?v=ySLc8gZ3oEc
 
+![img.png](img.png)
 ## Related guides
 
-- RESTEasy JAX-RS ([guide](https://quarkus.io/guides/rest-json)): REST endpoint framework implementing JAX-RS and more
+Check CoinMarketCap API Documentation
+>https://coinmarketcap.com/api/
 
-## Provided examples
+## Provided implementations
 
-### RESTEasy JAX-RS example
+    @GET( "v1/cryptocurrency/listings/latest")
+    Call<Latest> getLatestList();
 
-REST is easy peasy with this Hello World RESTEasy resource.
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
-
-### RESTEasy JSON serialisation using Jackson
-
-This example demonstrate RESTEasy JSON serialisation by letting you list, add and remove quark types from a list. Quarked!
-
-[Related guide section...](https://quarkus.io/guides/rest-json#creating-your-first-json-rest-service)
+    @GET("v1/cryptocurrency/map")
+    Call<AllTokens> getAllTokens();
