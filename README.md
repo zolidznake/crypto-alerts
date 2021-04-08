@@ -42,11 +42,9 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
 
+
 You can then execute your native executable with: `./target/crypto-alerts-1.0.0-SNAPSHOT-runner`
 
->Youtube: https://www.youtube.com/watch?v=ySLc8gZ3oEc
-
-![img.png](img.png)
 ## Related guides
 
 Check CoinMarketCap API Documentation
@@ -59,3 +57,12 @@ Check CoinMarketCap API Documentation
 
     @GET("v1/cryptocurrency/map")
     Call<AllTokens> getAllTokens();
+
+
+##Have some fun while developing ;)
+
+>Youtube: https://www.youtube.com/watch?v=ySLc8gZ3oEc
+
+![Image of Yaktocat](https://octodex.github.com/images/daftpunktocat-thomas.gif)
+
+
