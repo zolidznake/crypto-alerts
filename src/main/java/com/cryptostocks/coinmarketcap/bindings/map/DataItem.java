@@ -26,7 +26,7 @@ public class DataItem{
 	private String slug;
 
 	@JsonProperty("platform")
-	private Object platform;
+	private Platform platform;
 
 	@JsonProperty("first_historical_data")
 	private String firstHistoricalData;
@@ -59,7 +59,7 @@ public class DataItem{
 		return slug;
 	}
 
-	public Object getPlatform(){
+	public Platform getPlatform(){
 		return platform;
 	}
 

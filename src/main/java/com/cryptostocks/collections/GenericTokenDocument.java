@@ -1,14 +1,14 @@
-package com.cryptostocks.database;
+package com.cryptostocks.collections;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.cryptostocks.coinmarketcap.bindings.map.Platform;
 import io.quarkus.mongodb.panache.MongoEntity;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@MongoEntity(collection = "generic")
-public class GenericToken extends PanacheMongoEntity {
+@MongoEntity(collection = "generic", database = "crypto")
+public class GenericTokenDocument extends PanacheMongoEntity {
 
     public String symbol;
     public int isActive;
@@ -17,24 +17,24 @@ public class GenericToken extends PanacheMongoEntity {
     public int rank;
     public int id;
     public String slug;
-    public Object platform;
+    public Platform platform;
     public String firstHistoricalData;
     public LocalDateTime insertedDateTime;
     public LocalDateTime modifiedDateTime;
 
-    public static GenericToken findBySymbol(String symbol){
+    public static GenericTokenDocument findBySymbol(String symbol){
         return find("symbol", symbol).firstResult();
     }
 
-    public static GenericToken findById(int id){
+    public static GenericTokenDocument findById(int id){
         return find("id", id).firstResult();
     }
 
-    public static List<GenericToken>  findInactiveTokens(){
+    public static List<GenericTokenDocument>  findInactiveTokens(){
         return list("isActive", true);
     }
 
-    public static GenericToken findByRank(int rank){
+    public static GenericTokenDocument findByRank(int rank){
         return find("rank", rank).firstResult();
     }
 

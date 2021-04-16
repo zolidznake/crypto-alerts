@@ -1,4 +1,4 @@
-package com.cryptostocks.database;
+package com.cryptostocks.collections;
 
 import com.cryptostocks.coinmarketcap.bindings.listings.Quote;
 import io.quarkus.mongodb.panache.MongoEntity;
@@ -7,8 +7,8 @@ import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@MongoEntity(collection = "crypto")
-public class CryptoToken extends PanacheMongoEntity {
+@MongoEntity(collection = "cryptostocks", database = "crypto")
+public class CryptoTokenDocument extends PanacheMongoEntity {
 
     public String symbol;
     public Long circulatingSupply;
@@ -28,23 +28,23 @@ public class CryptoToken extends PanacheMongoEntity {
     public LocalDateTime insertedDateTime;
     public LocalDateTime modifiedDateTime;
 
-    public static List<CryptoToken> findAllTokens(){
+    public static List<CryptoTokenDocument> findAllTokens(){
         return listAll();
     }
 
-    public static CryptoToken findBySymbol(String symbol){
+    public static CryptoTokenDocument findBySymbol(String symbol){
         return find("symbol", symbol).firstResult();
     }
 
-    public static List<CryptoToken> findObsoletedTokens(){
+    public static List<CryptoTokenDocument> findObsoletedTokens(){
         return list("obsoleted", true);
     }
 
-    public static List<CryptoToken> findByTotalSupply(Long totalSupply){
+    public static List<CryptoTokenDocument> findByTotalSupply(Long totalSupply){
         return list("totalSupply", totalSupply);
     }
 
-    public static List<CryptoToken> findByMaxSupply(Long maxSupply){
+    public static List<CryptoTokenDocument> findByMaxSupply(Long maxSupply){
         return list("maxSupply", maxSupply);
     }
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class AuthInterceptor implements Interceptor {
 
     @ConfigProperty(name = "coinmarketcap.token")
-    private String coinMarketCapToken;
+     String coinMarketCapToken;
 
     @Override
     public Response intercept(Chain chain) throws IOException {

@@ -4,7 +4,7 @@ import com.cryptostocks.coinmarketcap.bindings.listings.DataItem;
 import com.cryptostocks.coinmarketcap.bindings.listings.Latest;
 import com.cryptostocks.coinmarketcap.client.AuthInterceptor;
 import com.cryptostocks.coinmarketcap.client.CoinMarketCapRestClient;
-import com.cryptostocks.database.CryptoToken;
+import com.cryptostocks.collections.CryptoTokenDocument;
 import okhttp3.OkHttpClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import retrofit2.Call;
@@ -16,6 +16,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @ApplicationScoped
 public class LatestListingsControllerApi  implements Callback<Latest> {
@@ -24,14 +25,14 @@ public class LatestListingsControllerApi  implements Callback<Latest> {
     AuthInterceptor authInterceptor;
 
     @ConfigProperty(name = "coinmarketcap.baseurl")
-    String BASE_URL;
+    String baseUrlString;
 
     public void start() {
         var builder = new OkHttpClient.Builder();
         builder.interceptors().add(authInterceptor);
         var client = builder.build();
 
-        Retrofit api = new Retrofit.Builder().baseUrl(BASE_URL)
+        Retrofit api = new Retrofit.Builder().baseUrl(baseUrlString)
                 .client(client).addConverterFactory(JacksonConverterFactory.create()).build();
 
         CoinMarketCapRestClient coinMarketCapRestClient = api.create(CoinMarketCapRestClient.class);
@@ -45,7 +46,7 @@ public class LatestListingsControllerApi  implements Callback<Latest> {
 
         if (response.isSuccessful()) {
             Latest latest = response.body();
-            latest.getData().stream().forEach(LatestListingsControllerApi::persistToDB);
+            Objects.requireNonNull(latest).getData().forEach(LatestListingsControllerApi::persistToDB);
         }
     }
 
@@ -56,22 +57,22 @@ public class LatestListingsControllerApi  implements Callback<Latest> {
 
 
     private static void persistToDB(DataItem crypto) {
-        CryptoToken persistenceCryptoToken = new CryptoToken();
-        persistenceCryptoToken.symbol = crypto.getSymbol();
-        persistenceCryptoToken.circulatingSupply = crypto.getCirculatingSupply();
-        persistenceCryptoToken.lastUpdated = crypto.getLastUpdated();
-        persistenceCryptoToken.totalSupply = crypto.getTotalSupply();
-        persistenceCryptoToken.cmcRank = crypto.getCmcRank();
-        persistenceCryptoToken.platform = crypto.getPlatform();
-        persistenceCryptoToken.tags = crypto.getTags();
-        persistenceCryptoToken.dateAdded = crypto.getDateAdded();
-        persistenceCryptoToken.quote = crypto.getQuote();
-        persistenceCryptoToken.numMarketPairs = crypto.getNumMarketPairs();
-        persistenceCryptoToken.name = crypto.getName();
-        persistenceCryptoToken.maxSupply = crypto.getMaxSupply();
-        persistenceCryptoToken.id = crypto.getId();
-        persistenceCryptoToken.slug = crypto.getSlug();
-        persistenceCryptoToken.insertedDateTime = LocalDateTime.now();
-        persistenceCryptoToken.persistOrUpdate();
+        CryptoTokenDocument persistenceCryptoTokenDocument = new CryptoTokenDocument();
+        persistenceCryptoTokenDocument.symbol = crypto.getSymbol();
+        persistenceCryptoTokenDocument.circulatingSupply = crypto.getCirculatingSupply();
+        persistenceCryptoTokenDocument.lastUpdated = crypto.getLastUpdated();
+        persistenceCryptoTokenDocument.totalSupply = crypto.getTotalSupply();
+        persistenceCryptoTokenDocument.cmcRank = crypto.getCmcRank();
+        persistenceCryptoTokenDocument.platform = crypto.getPlatform();
+        persistenceCryptoTokenDocument.tags = crypto.getTags();
+        persistenceCryptoTokenDocument.dateAdded = crypto.getDateAdded();
+        persistenceCryptoTokenDocument.quote = crypto.getQuote();
+        persistenceCryptoTokenDocument.numMarketPairs = crypto.getNumMarketPairs();
+        persistenceCryptoTokenDocument.name = crypto.getName();
+        persistenceCryptoTokenDocument.maxSupply = crypto.getMaxSupply();
+        persistenceCryptoTokenDocument.id = crypto.getId();
+        persistenceCryptoTokenDocument.slug = crypto.getSlug();
+        persistenceCryptoTokenDocument.insertedDateTime = LocalDateTime.now();
+        persistenceCryptoTokenDocument.persistOrUpdate();
     }
 }

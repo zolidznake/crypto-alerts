@@ -1,22 +1,17 @@
 package com.cryptostocks;
 
-import com.cryptostocks.bindings.BitcoinMempoolAlert;
-import com.cryptostocks.bindings.CoinListingAlert;
 import com.cryptostocks.coinmarketcap.client.CoinMarketCapService;
-import com.cryptostocks.constants.CryptoAlertType;
-import com.cryptostocks.converter.AlertConverter;
 import com.cryptostocks.converter.ConverterService;
+import com.cryptostocks.services.CryptoAlertingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.vertx.core.json.JsonObject;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Objects;
 
 @Path("/crypto")
 public class CryptoCurrencyAlert {
@@ -28,40 +23,16 @@ public class CryptoCurrencyAlert {
     @Inject
     CoinMarketCapService coinMarketCapService;
 
+    @Inject
+    CryptoAlertingService cryptoAlertingService;
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("/alert")
     public Response postAlert(String json) throws JsonProcessingException {
-
-        JsonObject obj = new JsonObject(json);
-        String value = obj.getString(CryptoAlertType.TYPE);
-
-
-        AlertConverter alertConverter
-                = converterService.getAlertConverter(CryptoAlertType.NEW_COIN_LISTING_ALERT);
-       Object object =  alertConverter.convertTo(value, json);
-
-        CoinListingAlert coinListingAlert
-                = (CoinListingAlert) alertConverter.convertTo(value, json);
-
-        System.out.println(coinListingAlert.toString());
-
-        if (!Objects.isNull(coinListingAlert)) {
-            return Response.ok().build();
-        }
-
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return cryptoAlertingService.processAlert(json);
     }
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/cmc")
-    public Response getLatestListing(){
-
-      //  coinMarketCapService.callLatestListing();
-        coinMarketCapService.callAllTokensMap();
-        return Response.ok().build();
-    }
-
 }
 
 

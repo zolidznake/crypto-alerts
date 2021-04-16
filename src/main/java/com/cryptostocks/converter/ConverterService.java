@@ -10,9 +10,9 @@ import java.util.Map;
 @ApplicationScoped
 public class ConverterService {
 
-    Map<String, AlertConverter> convertersMap = new HashMap<>();
+   private Map<String, AlertConverter> convertersMap = new HashMap<>();
 
-    private ConverterService() {
+     ConverterService() {
 
         convertersMap.put(CryptoAlertType.BITCOIN_MEMPOOL_ALERT, new BitcoinMempoolAlertConverter());
         convertersMap.put(CryptoAlertType.BLOCKCHAIN_ALERT, new BlockchainAlertConverter());
