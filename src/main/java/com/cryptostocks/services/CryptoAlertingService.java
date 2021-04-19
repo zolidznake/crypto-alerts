@@ -2,9 +2,13 @@ package com.cryptostocks.services;
 
 
 import com.cryptostocks.bindings.CoinListingAlert;
+import com.cryptostocks.bindings.MarketCapAlert;
 import com.cryptostocks.bindings.PercentPriceAlert;
+import com.cryptostocks.bindings.PriceAlert;
 import com.cryptostocks.collections.CoinListingAlertDocument;
+import com.cryptostocks.collections.MarketCapAlertDocument;
 import com.cryptostocks.collections.PercentPriceAlertDocument;
+import com.cryptostocks.collections.PriceAlertDocument;
 import com.cryptostocks.constants.CryptoAlertType;
 import com.cryptostocks.converter.AlertConverter;
 import com.cryptostocks.converter.ConverterService;
@@ -68,9 +72,47 @@ public class CryptoAlertingService {
             percentPriceAlertDocument.message = percentPriceAlert.getMessage();
             percentPriceAlertDocument.exchange = percentPriceAlert.getExchange();
             percentPriceAlertDocument.window = percentPriceAlert.getWindow();
+            percentPriceAlertDocument.insertedDateTime= LocalDateTime.now().toString();
             percentPriceAlertDocument.persist();
 
         }
+
+        if(CryptoAlertType.PRICE_ALERT.equalsIgnoreCase(value)){
+
+
+            AlertConverter alertConverter
+                    = converterService.getAlertConverter(CryptoAlertType.PRICE_ALERT);
+            PriceAlert priceAlert
+                    =(PriceAlert) alertConverter.convertTo(value, json);
+
+            PriceAlertDocument priceAlertDocument = new PriceAlertDocument();
+            priceAlertDocument.type = priceAlert.getType();
+            priceAlertDocument.currency = priceAlert.getCurrency();
+            priceAlertDocument.exchange = priceAlert.getExchange();
+            priceAlertDocument.direction = priceAlert.getDirection();
+            priceAlertDocument.message = priceAlert.getMessage();
+            priceAlertDocument.price = priceAlert.getPrice();
+            priceAlertDocument.target_currency = priceAlert.getTargetCurrency();
+            priceAlertDocument.insertedDateTime = LocalDateTime.now().toString();
+        }
+
+        if(CryptoAlertType.MARKETCAP_ALERT.equalsIgnoreCase(value)){
+
+            AlertConverter alertConverter
+                    = converterService.getAlertConverter(CryptoAlertType.MARKETCAP_ALERT);
+
+            MarketCapAlert marketCapAlert
+                    =(MarketCapAlert) alertConverter.convertTo(value,json);
+            MarketCapAlertDocument marketCapAlertDocument = new MarketCapAlertDocument();
+            marketCapAlertDocument.type = marketCapAlert.getType();
+            marketCapAlertDocument.message = marketCapAlert.getMessage();
+            marketCapAlertDocument.currency = marketCapAlert.getCurrency();
+            marketCapAlertDocument.threshold = marketCapAlert.getThreshold();
+            marketCapAlertDocument.direction = marketCapAlert.getDirection();
+            marketCapAlertDocument.insertedDateTime = LocalDateTime.now().toString();
+        }
+
+
 
         return Response.status(Response.Status.BAD_REQUEST).build();
 
